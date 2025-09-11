@@ -14,8 +14,8 @@ class Config:
     MAIL_SERVER = os.environ.get('MAIL_SERVER') or 'smtp.gmail.com'
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 587)
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', 'True').lower() == 'true'
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'nabievm811@gmail.com'
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'dzkjsqcuhbgnlpqz'  # Используйте пароль приложения
-    MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER') or 'nabievm811@gmail.com'
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'chat04679@gmail.com'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'ucswukjaltmjlkvo'  # Используйте пароль приложения
+    MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER') or 'chat04679@gmail.com'
     
     # Отключите режим отладки для продакшена
