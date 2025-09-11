@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block title %}Главная{% endblock %} 
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-5">Добро пожаловать!</h1>
+  <p class="lead">Пример сайта с регистрацией на Flask.</p>
+  <hr />
+  <p>
+    <a class="btn btn-primary" href="{{ url_for('register') }}"
+      >Зарегистрироваться</a
+    >
+  </p>
+</div>
+{% endblock %}
