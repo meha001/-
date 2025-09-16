@@ -6,11 +6,10 @@ from forms import RegistrationForm, LoginForm
 from email_utils import send_confirmation_email, confirm_token
 from flask_login import login_user, logout_user, login_required, current_user
 
-
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
-
+    
     # init
     db.init_app(app)
     mail.init_app(app)
@@ -30,7 +29,7 @@ def create_app():
     @app.route('/register', methods=['GET', 'POST'])
     def register():
         if current_user.is_authenticated:
-            return redirect(url_for('dashboard'))
+          return redirect(url_for('dashboard'))
         form = RegistrationForm()
         if form.validate_on_submit():
             user = User(email=form.email.data.lower(), username=form.username.data)
@@ -38,14 +37,14 @@ def create_app():
             db.session.add(user)
             db.session.commit()
 
-            # send confirmation
-            try:
-                send_confirmation_email(user, app)
-                flash('Регистрация успешна. Проверьте почту и подтвердите аккаунт.', 'success')
-            except Exception as e:
-                # на проде логируй ошибку
-                flash('Не удалось отправить письмо. Обратитесь к администратору.', 'warning')
-            return redirect(url_for('login'))
+            # send confirmation - УБРАТЬ ВТОРОЙ АРГУМЕНТ app!
+            # try:
+            send_confirmation_email(user)  # ← ТОЛЬКО user!
+            flash('Регистрация успешна. Проверьте почту и подтвердите аккаунт.', 'success')
+            # except Exception as e:
+            #     # на проде логируй ошибку
+            #     flash(f'Не удалось отправить письмо. Обратитесь к администратору. {e}', 'warning')
+            # return redirect(url_for('login'))
         return render_template('register.html', form=form)
 
     @app.route('/confirm/<token>')
