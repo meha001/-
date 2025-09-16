@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Главная 🏠{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <h1>Добро пожаловать в FlaskAuth 🌟</h1>
+    <p class="lead">Это простое приложение с регистрацией, подтверждением по почте и входом 👤.</p>
+    {% if not current_user.is_authenticated %}
+      <a href="{{ url_for('register') }}" class="btn btn-primary">Регистрация ✍️</a>
+      <a href="{{ url_for('login') }}" class="btn btn-secondary">Войти 🔑</a>
+    {% else %}
+      <a href="{{ url_for('dashboard') }}" class="btn btn-success">Перейти в Dashboard 🧭</a>
+    {% endif %}
+  </div>
+{% endblock %}
