@@ -1,7 +1,8 @@
 __author__ = 'meha001'
 
-from flask.ext.restful import Resource, reqparse
-from flask.ext.security import auth_token_required, roles_required, login_user
+from flask_restful import Resource, reqparse  # Исправленный импорт
+from flask_security import auth_token_required, roles_required, login_user  # Исправленный импорт
+from flask import current_app
 from .models import User
 
 
@@ -22,9 +23,15 @@ class Login(Resource):  # 自定义登录函数
             .add_argument('username', type=str, location='json', required=True, help="用户名不能为空") \
             .add_argument("password", type=str, location='json', required=True, help="密码不能为空") \
             .parse_args()
+        
         user = User.authenticate(args['username'], args['password'])
         if user:
-            login_user(user=user)
-            return {"message": "登录成功", "token": user.get_auth_token()}, 200
+            login_user(user)  # Упрощенный вызов
+            return {
+                "message": "登录成功", 
+                "token": user.get_auth_token(),
+                "user_id": user.id,
+                "username": user.username
+            }, 200
         else:
             return {"message": "用户名或密码错误"}, 401

@@ -1,8 +1,7 @@
 __author__ = 'meha001'
 
-
 from App import app
-from flask.ext.restful import Api
+from flask_restful import Api  # Исправленный импорт
 from App.controller import Protected, Login
 
 api = Api(app, default_mediatype="application/json")
